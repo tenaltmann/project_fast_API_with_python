@@ -16,6 +16,7 @@ BIBLIOTECAS UTILIZADAS
     # PUT / PATCH => edição
     # DELETE => deletar
 
+---------------------------------------------------------------------------------------------------------------
 Formas de criar rotas
     3 Opções:
         1 - Criar tudo no aplicativo (main.py) - não recomendado, usado apenas quando há pouquissimas rotas
@@ -32,12 +33,35 @@ Formas de criar rotas
             importar após o "app = Fast API()"
             isso evita o problema de "referência cicular", ondfe o arquivo main precisa de outros arquivos para funcionar e outros arquivos precisam do main para funcionar
 
+---------------------------------------------------------------------------------------------------------------
 COMANDOS NO TERMINAL de instalação
     Instalação de bibliotecas:
         pip install fastapi uvicorn sqlalchemy passlib[bcrypt] python-jose[cryptograph] python-dotenv python-multipart
 
-
+---------------------------------------------------------------------------------------------------------------
 COMANDOS NO TERMINAL  usados mais de uma vez (rotineiramente)
 
     Para rodar o código, iniciar o servidor:
         Executar no terminal:   uvicorn main:app --reload
+
+
+
+---------------------------------------------------------------------------------------------------------------
+ARQUIVOS CRIADOS E FINALIDADES (por ordem de criação)
+
+README.md -         descrição do projeto e explicação basica do processo de desenvolvimento
+main.py -           arquivo principal do aplicativo
+auth_routes.py -    arquivo que irá armazenar as rotas de autenticação
+order_routes.py -   arquivo que irá armazenar as rotas de pedidos
+models.py -         arquivo que irá conter as classes do banco de dadose posteriormente criar o mesmo
+
+
+---------------------------------------------------------------------------------------------------------------
+CRIAÇÃO DO BANCO DE DADOS
+
+    ORM (Object Relative Models)- Ferramenta de construção de Banco de dados 
+        SQLALCHEMY      -    Traduz os comandos em python para o banco de dados
+
+    BANCO DE DADOS UTILIZADO
+        SQLITE
+
