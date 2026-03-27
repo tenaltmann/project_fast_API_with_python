@@ -56,5 +56,17 @@ class Pedido(Base):
         self.status = status 
         self.preco = preco
 
+# Classe ItensPedido
+
+class ItensPedido(Base):
+    __tablename__= "itens_pedido"
+
+    id = Column("id", Integer, primary_key=True, autoincrement=True)
+    quantidade = Column ("quantidade", Integer)
+    sabor = Column ("sabor", String )
+    tamanho = Column ("tamanho")
+    preco_unitario = ("preco_unitario",Float)
+    pedido = ("pedido", ForeignKey("pedidos.id"))
+
         
 # executando a criação dos metadados do banco (Cria efetivamenet o banco de dados)
