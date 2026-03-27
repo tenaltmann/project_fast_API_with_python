@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, String, Integer, Boolean, Float, ForeignKey       # Column, String, Integer, Boolean, Float - são os tipos de dados que serão usados tabelas      ForeingKey = func usado para fazer a conexão entre as tabelas
 from sqlalchemy.orm import declarative_base
+from sqlalchemy_utils import ChoiceType
 
 
 # criando a conexão com o banco de dados 
@@ -11,6 +12,7 @@ Base = declarative_base()       # Base sera a variavel que vai permitir a criaç
 
 # criando as classes / tabelas do banco de dados
 
+# Classe usuário
 class Usuario(Base):
     __tablename__= "usuarios"       # por padrao a tabela pega o nome definido da classe em lowercase, ja com o __tablename__ conseguimos escolher o nome da tabela) 
 
@@ -30,5 +32,29 @@ class Usuario(Base):
         self.senha = senha
         self.ativo = ativo
         self.admin = admin
+
+# Classe pedido
+class Pedido(Base):
+    __tablename__= "pedidos"
+
+    # TUPLA DE TUPLAS para definir o status do pedido para impossibilitar um status diferente dos predeterminados
+    STATUS_PEDIDO = (
+          #chave        #valor
+        ("PENDENDTE", "PENDENDTE")
+        ("CANCELADO", "CANCELADO")
+        ("FINALIZADO","FINALIZADO")
+    )
+
+
+    id = Column("id", Integer, primary_key=True, autoincrement=True)
+    status = Column ("status", ChoiceType(STATUS_PEDIDO))           # ChoiceType - limita o status aos 3 tipos definidos em STATUS_PEDIDO 
+    usuario = Column("usuario", ForeignKey("usuarios.id"))          # ForeignKey - O ForeignKey("usuarios.id") referencia o nome da tabela e a coluna no banco de dados
+    preco = Column("preco", Float)
+
+    def __init__ (self, usuario, status="PENDENTE", preco=0):
+        self.usuario = usuario 
+        self.status = status 
+        self.preco = preco
+
         
 # executando a criação dos metadados do banco (Cria efetivamenet o banco de dados)
