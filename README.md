@@ -38,11 +38,25 @@ COMANDOS NO TERMINAL de instalação
     Instalação de bibliotecas:
         pip install fastapi uvicorn sqlalchemy passlib[bcrypt] python-jose[cryptograph] python-dotenv python-multipart
 
+        pip install sqlalchemy
+
+        pip install sqlalchemy_utils
+
+        pip install alembic
+
+        
+
+
 ---------------------------------------------------------------------------------------------------------------
 COMANDOS NO TERMINAL  usados mais de uma vez (rotineiramente)
 
     Para rodar o código, iniciar o servidor:
         Executar no terminal:   uvicorn main:app --reload
+
+        alembic init alembic
+
+        Comando para gerar o banco de dados
+        alembic revision --autogenerate -m "Initial Migation"
 
 
 

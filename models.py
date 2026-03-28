@@ -38,16 +38,16 @@ class Pedido(Base):
     __tablename__= "pedidos"
 
     # TUPLA DE TUPLAS para definir o status do pedido para impossibilitar um status diferente dos predeterminados
-    STATUS_PEDIDO = (
-          #chave        #valor
-        ("PENDENDTE", "PENDENDTE")
-        ("CANCELADO", "CANCELADO")
-        ("FINALIZADO","FINALIZADO")
-    )
+   # STATUS_PEDIDO = (
+   #       #chave        #valor
+   #     ("PENDENDTE", "PENDENDTE")
+   #     ("CANCELADO", "CANCELADO")
+   #     ("FINALIZADO","FINALIZADO")
+   # )
 
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
-    status = Column ("status", ChoiceType(STATUS_PEDIDO))           # ChoiceType - limita o status aos 3 tipos definidos em STATUS_PEDIDO 
+    status = Column ("status", String)           # ChoiceType - limita o status aos 3 tipos definidos em STATUS_PEDIDO 
     usuario = Column("usuario", ForeignKey("usuarios.id"))          # ForeignKey - O ForeignKey("usuarios.id") referencia o nome da tabela e a coluna no banco de dados
     preco = Column("preco", Float)
 
@@ -64,9 +64,19 @@ class ItensPedido(Base):
     id = Column("id", Integer, primary_key=True, autoincrement=True)
     quantidade = Column ("quantidade", Integer)
     sabor = Column ("sabor", String )
-    tamanho = Column ("tamanho")
-    preco_unitario = ("preco_unitario",Float)
-    pedido = ("pedido", ForeignKey("pedidos.id"))
+    tamanho = Column ("tamanho", String)
+    preco_unitario = Column ("preco_unitario",Float)
+    pedido = Column ("pedido", ForeignKey("pedidos.id"))
 
+
+    def __init__(self, quantidade, sabor, tamanho, preco_unitario, pedido):
+
+        self.quantidade = quantidade
+        self.sabor = sabor 
+        self.tamanho = tamanho
+        self.preco_unitario = preco_unitario 
+        self.pedido = pedido
         
 # executando a criação dos metadados do banco (Cria efetivamenet o banco de dados)
+            # alembic revision --autogenerate -m "Initial Migation"
+            # alembic upgrade head
